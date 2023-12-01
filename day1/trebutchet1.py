@@ -45,6 +45,7 @@ def main():
     session_cookie = "53616c7465645f5f18facde817a82dbe29570bcb5b59eb4b14d3bc50b5b3820085ff017df59c46f31767f786c266b7431fcfb1fbe5ed22a29e980753ba4e7fb2"
 
     print_calibration_sum_from_file(getInput(url,session_cookie))
+    ##Debug purposes##
     #print_calibration_sum_from_file("aux.txt")
 
 
