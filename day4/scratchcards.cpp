@@ -15,9 +15,9 @@ Terms:
 m = number of lines in the file
 n = quantity of numbers in each line
 
-Using bruteforce would have a cost of O(m*(n+n*n)) = O(mn+ mn^2 ). Instead we are going to use an approach 
+Using bruteforce would have a cost of O(m*(n+n*n)) = O(mn+ mn^2 ) = O(mn^2). Instead we are going to use an approach 
 where we use first a  Quicksort algorithm and then a binary search. This Quicksort+BinarySearch combined algorithm would have a computational cost
-of O(m(n+nlogn+logn)) = O(m*n*logn). O(m*n*logn) < O(mn+ mn^2 ), we are using Quicksort+BinarySearch approach.
+of O(n+m(n+nlogn+nlogn) = O(mn+2mnlogn)= O(mnlogn) . O(m*n*logn) < O(mn^2 ), we are using Quicksort+BinarySearch approach.
 
 Implementation specifics
 
@@ -72,7 +72,6 @@ void fillVectorsOrdered(vector<int>& vectNum,vector<int>& vectPrized,const strin
     bool numberToPlace = false;
     int counter = 0;
     
-    cout << "Line>> " << str << endl;
     for (char character : str){
         if(!numbers && !prizeNumbers && character == ':' ){
             numbers = true;
@@ -206,19 +205,8 @@ int getPrizeSum(string path){
 }
 
 int main(){
-    //int prize = getPrizeSum("input.txt");
     int prize = getPrizeSum("input.txt");
     std::cout << "Sum of all the prizes-> " << prize << std::endl;
-
-    //vector<int> aux = {0,1,2,3};
-    //std::cout << isValueInVector(aux, 0, 3,2) << std::endl;
-    //tuple<int,int> sizes = getVectorsSize("Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53");
-    //std::cout << "Vector sizes-> " << get<0>(sizes) << " " << get<1>(sizes)<< std::endl;
-   // tuple<int,int> sizes2 = getVectorsSize("Card 151: 67 29  3 38 79 20  8 70 44 53 | 10 20 13 21 70 53 59 92  9 56 79  8  3 78 75 42 38 41 44 80 29 48 47 32  7");
-    //std::cout << "Vector sizes-> " << get<0>(sizes2) << " " << get<1>(sizes2)<< std::endl;
-    //string test = "Card   1: 81  1 43 40 49 51 38 65 36  4 | 21 15  1 43 60  9 83 81 35 49 40 38 82 65 20  4 58 94 16 89 84 10 77 48 76";
-    //tuple<int,int> sizes = getVectorsSize(test);
-    //std::cout << "Vector sizes-> " << get<0>(sizes) << " " << get<1>(sizes)<< std::endl;
 
     return 0;
 }
