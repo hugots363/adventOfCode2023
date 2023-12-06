@@ -1,6 +1,6 @@
 # Advent of Code 2023
 
-In this repository I will upload all the problems I managed to fix in advent of code 2023. The idea is to solve the odd numbers with Python while the even numbers will be solved with C++. 
+In this repository, I will upload all the problems I manage to solve in Advent of Code 2023. It's all done for fun, so I'll tackle some in Python and others in C++, depending on how I feel that day. Fun is the key!
 
 ## Usage
 
