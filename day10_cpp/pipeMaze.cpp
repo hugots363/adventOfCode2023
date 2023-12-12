@@ -6,16 +6,13 @@
 #include <stdexcept>
 
 /*
-TODO
 Theoretical approach
 Terms:
 m = number of lines in the file
-n = quantity of numbers in each line
+n = quantity of chars in each line
 
-Now the cost of my algorithm is similar: O(2m+n+m(2n+2nlogn)) =  O(n+2m(1+n+nlogn)) = O(mnlogn). The problem I don't
-know how to solve at the moment (if it is possible) is how to store the generated copies of the tickets without having
-to generate a vector with one entry for each line of the input file.
-
+The total cost of the algorithm is O(m*n+m*n+m*n+m*n) = O(m*n). 
+This would be in the worst case scenario were all the chars are part of the cycle
 */
 
 std::tuple<int, int> getRowsAndColumns(const std::string& filePath) {
@@ -135,6 +132,7 @@ Direction getStartingPos(std::vector<std::vector<char>>& matrix, int posX,int po
 }
 
 int calculateTotalSteps(std::vector<std::vector<char>>& matrix, int startingX, int startingY){
+    //O(m*n)
     int nSteps = 0;
     bool endReached = false;
     bool returning = false;
