@@ -1,9 +1,10 @@
 import urllib.request
 import re
+from collections import OrderedDict
  
 def getInput(url, session_cookie):
     input_name = "input.txt"
- 
+
     getter = urllib.request.build_opener()
     getter.addheaders.append(("Cookie", f"session={session_cookie}"))
     urllib.request.install_opener(getter)
@@ -21,24 +22,57 @@ def getNumbers(line):
         numInts.append(int(num))
     return numInts
 
-def getSeeds(line):
-    return getNumbers(line)
+def getSeeds(line): 
+    numbers = getNumbers(line)
+    dict = OrderedDict()
+    for num in sorted(numbers):
+        dict[num] = num
+    print(dict)
+    return dict
 
 def isMap(line):
     if re.search("map",line):
         return True
     return False
 
-def getListedDicts(lines,dicts):
-    nMap = 0
+def fillMap(line,map):
+    positions = getNumbers(line)
+    it = 0
+    for x in range(positions[0],positions[0]+positions[2]+1):
+        map[x] = positions[1]+it
+        it = it +1
+
+def advanceLevel(seeds,map):
+    print(map)
+    for key in seeds:
+        if key in map:
+            orgSeed = seeds[key]
+            del seeds[key]
+            seeds[map[key]] = orgSeed
+
+def generateMap():
+
+    return map
+
+def iterateDicts(lines,listOfMaps):
+    map = OrderedDict()
+    #TODO
     for line in lines:
-        print(line)
         if isMap(line):
-            print(line)
+            map.clear()
+        elif line == '\n':
+            map = generateMap(line)
         else:
-            print(getNumbers(line))
+            fillMap(line,map)
+            listOfMaps.append(map)
+    return listOfMaps
 
-
+def getLowestSeed(seeds):
+    lowestSeed = list(seeds.keys())[0]
+    for seed in seeds:
+        if seeds[seed] < seeds[lowestSeed]:
+            lowestSeed = seeds[lowestSeed]
+    return lowestSeed
  
  
 def main():
@@ -53,9 +87,12 @@ def main():
     f.close()
     #Get data
     seeds = getSeeds(lines[0])
-    dicts = []
     lines = lines[2:]
-    getListedDicts(lines,dict)
+    lines.append('\n')
+    listOfMaps = iterateDicts(lines)
+    print(listOfMaps)
+    #lowestSeed = getLowestSeed(seeds)
+    #print("The seed with lowest position is "+ lowestSeed + "with value" + seeds[lowestSeed] )
 
  
 if __name__ == "__main__":
