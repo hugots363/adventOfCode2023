@@ -1,6 +1,5 @@
 import urllib.request
 import re
-from collections import OrderedDict
  
 def getInput(url, session_cookie):
     input_name = "input.txt"
@@ -16,83 +15,86 @@ def getInput(url, session_cookie):
         return None
     
 def getNumbers(line):
-    nums = re.findall(r"\d+",line)
-    numInts = []
-    for num in nums:
-        numInts.append(int(num))
-    return numInts
+    return [int(num) for num in re.findall(r"\d+", line)]
+
 
 def getSeeds(line): 
     numbers = getNumbers(line)
-    dict = OrderedDict()
+    list = []
     for num in sorted(numbers):
-        dict[num] = num
-    print(dict)
-    return dict
+        list.append(num)
+    return list
 
 def isMap(line):
-    if re.search("map",line):
-        return True
-    return False
+    return "map" in line
 
 def fillMap(line,map):
     positions = getNumbers(line)
     it = 0
-    for x in range(positions[0],positions[0]+positions[2]+1):
-        map[x] = positions[1]+it
+    for x in range(positions[1],positions[1]+positions[2]):
+        #map[x] = positions[1]+it
+        map[x] = positions[0]+it
         it = it +1
 
 def advanceLevel(seeds,map):
-    print(map)
     for key in seeds:
         if key in map:
             orgSeed = seeds[key]
             del seeds[key]
             seeds[map[key]] = orgSeed
 
-def generateMap():
+def iterateDicts(lines):
+    listOfMaps = []
+    map = {}
 
-    return map
-
-def iterateDicts(lines,listOfMaps):
-    map = OrderedDict()
-    #TODO
     for line in lines:
         if isMap(line):
-            map.clear()
+            map = {}
         elif line == '\n':
-            map = generateMap(line)
-        else:
-            fillMap(line,map)
             listOfMaps.append(map)
+        else:
+            fillMap(line, map)
+
     return listOfMaps
 
-def getLowestSeed(seeds):
-    lowestSeed = list(seeds.keys())[0]
+def findSeedLocation(seed, listOfMaps):
+    key = seed
+    #print("seed: "+str(key))
+    for map in listOfMaps:
+        if key in map:
+            key = map[key]
+    return key
+
+
+def getLowestSeed(seeds,listOfMaps):
+    lowestSeed = seeds[0]
+    value = 9999999999
     for seed in seeds:
-        if seeds[seed] < seeds[lowestSeed]:
-            lowestSeed = seeds[lowestSeed]
-    return lowestSeed
+        auxValue = findSeedLocation(seed, listOfMaps)
+        if auxValue < value:
+            lowestSeed = seed
+            value = auxValue
+    return value
  
  
 def main():
-    #url = "https://adventofcode.com/2023/day/3/input"
-    #session_cookie = "53616c7465645f5f18facde817a82dbe29570bcb5b59eb4b14d3bc50b5b3820085ff017df59c46f31767f786c266b7431fcfb1fbe5ed22a29e980753ba4e7fb2"
+    url = "https://adventofcode.com/2023/day/5/input"
+    session_cookie = "53616c7465645f5f18facde817a82dbe29570bcb5b59eb4b14d3bc50b5b3820085ff017df59c46f31767f786c266b7431fcfb1fbe5ed22a29e980753ba4e7fb2"
  
-    #file = getInput(url,session_cookie)
-    #file = "input.txt"
-    file = "/home/hugots/projects/leisure/adventOfCode2023/day5_py/aux.txt"
+    file = getInput(url,session_cookie)
+    file = "/home/hutarsan/projects/leisure/advent_code_2023/day5_py/input.txt"
+    #file = "/home/hutarsan/projects/leisure/advent_code_2023/day5_py/aux.txt"
     f = open(file, 'r')
     lines = f.readlines()
     f.close()
+
     #Get data
     seeds = getSeeds(lines[0])
     lines = lines[2:]
     lines.append('\n')
     listOfMaps = iterateDicts(lines)
-    print(listOfMaps)
-    #lowestSeed = getLowestSeed(seeds)
-    #print("The seed with lowest position is "+ lowestSeed + "with value" + seeds[lowestSeed] )
+    lowestSeed = getLowestSeed(seeds,listOfMaps)
+    print("The lowest position in seeds is "+ str(lowestSeed ))
 
  
 if __name__ == "__main__":
