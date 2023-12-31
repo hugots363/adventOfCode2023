@@ -29,7 +29,6 @@ const std::map<char, int> cardVal = {
         {'A', 14},
         {'K', 13},
         {'Q', 12},
-        {'J', 11},
         {'T', 10},
         {'9', 9},
         {'8', 8},
@@ -38,7 +37,8 @@ const std::map<char, int> cardVal = {
         {'5', 5},
         {'4', 4},
         {'3', 3},
-        {'2', 2}
+        {'2', 2},
+        {'J', 1}
     };
 
 struct Hand{
@@ -51,18 +51,42 @@ bool compare(const std::pair<char, int>& a, const std::pair<char, int>& b) {
     return a.second > b.second;
 }
 
+int extractJokers(std::string &hand){
+    int cont = 0;
+    for(auto it = hand.begin(); it != hand.end();){
+        if(*it == 'J'){
+            cont++;
+            it = hand.erase(it);
+        }
+        else{
+            it++;
+        }
+    }
+    return cont;
+}
+
+
 Type calculateHandType(const std::string &hand){
     std::map<char,int> valCount;
+    std::string newHand = hand;
+    int totalJokers = extractJokers(newHand);
 
-    for(char val : hand){
+    for(char val : newHand){
         valCount[val]++;
     }
     std::vector<std::pair<char, int>> count_vec(valCount.begin(), valCount.end());
 
-    std::sort(count_vec.begin(), count_vec.end(), compare);
+    std::sort(count_vec.begin(), count_vec.end(), compare); 
 
+    int most_repeated = 0;
     auto it = count_vec.begin();
-    int most_repeated = it->second;
+    if(!newHand.empty()){
+        most_repeated = it->second + totalJokers;
+    }
+    else{
+        return Type::FiveOfKind;
+    }
+
     switch(most_repeated){
         case 5:
             return Type::FiveOfKind;
