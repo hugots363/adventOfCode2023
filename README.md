@@ -10,20 +10,20 @@ TODO
 
 | Day | Name           | Stars |
 | --- | -------------- | ----- |
-| 01  | Trebuchet?!    | ⭐⭐  |
-| 02  | Cube Conundrum | ⭐⭐  |
-| 03  | Gear Ratios    | ⭐⭐  |
-| 04  | Scratchcards   | ⭐⭐  |
-| 05  |                | ⭐   |
-| 06  |                | ⭐⭐  |
-| 07  |                | ⭐⭐  |
+| 01  | trebuchet      | ⭐⭐  |
+| 02  | cubeConundrum  | ⭐⭐  |
+| 03  | gearRatios     | ⭐⭐  |
+| 04  | scratchcards   | ⭐⭐  |
+| 05  | seeds          | ⭐   |
+| 06  | waitForIt      | ⭐⭐  |
+| 07  | cards          | ⭐⭐  |
 | 08  |                |       |
 | 09  |                |       |
-| 10  |                | ⭐⭐  |
+| 10  |  pipeMaze      | ⭐⭐  |
 | 11  |                |       |
 | 12  |                |       |
 | 13  |                |       |
-| 14  |                | ⭐ |
+| 14  |                | ⭐    |
 | 15  |                |       |
 | 16  |                |       |
 | 17  |                |       |
