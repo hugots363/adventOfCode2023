@@ -18,7 +18,7 @@ TODO
 | 05  | seeds          | ⭐   |
 | 06  | waitForIt      | ⭐⭐  |
 | 07  | cards          | ⭐⭐  |
-| 08  |                | ⭐    |
+| 08  | hauntedWasteland| ⭐    |
 | 09  |                |       |
 | 10  |  pipeMaze      | ⭐⭐  |
 | 11  |                |       |
