@@ -55,13 +55,12 @@ int calculateHistoricNumber(string line) {
 
 int main(void) {
     int total = 0;
-    // std::ifstream file("aux.txt");
-    // std::string line;
-    // while (std::getline(file, line)) {
-    //     total += calculateHistoricNumber(line);
-    // }
-    // file.close();
-    total = calculateHistoricNumber("1 3 6 10 15 21");
+    std::ifstream file("input.txt");
+    std::string line;
+    while (std::getline(file, line)) {
+        total += calculateHistoricNumber(line);
+    }
+    file.close();
     cout << "TOTAL:" << total << endl;
 
     return 0;
