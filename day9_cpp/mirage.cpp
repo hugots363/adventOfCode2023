@@ -8,13 +8,11 @@ using namespace std;
 
 vector<int> createNextIteration(const vector<int> &prevIter) {
     vector<int> iter;
-    // cout << "" << endl;
     for (size_t i = 0; i < prevIter.size() - 1; ++i) {
         iter.push_back( prevIter[i + 1] - prevIter[i] );
-        // cout << " " << prevIter[i + 1] - prevIter[i];
+        cout << " " << prevIter[i + 1] - prevIter[i];
     }
-   
-    // cout << "" << endl;
+    cout <<  endl;
     return iter;
 }
 
@@ -32,9 +30,10 @@ int calculateHistoricNumber(string line) {
     vector<vector<int>> historics;
     historics.push_back(lineOfNums);
 
-    // for (int num : historics[0]) {
-    //     cout << num << " ";
-    // }
+    for (int num : historics[0]) {
+        cout << num << " ";
+    }
+    cout <<  endl;
 
     int iterations = 0;
     //Generation the pyramidal structure that stores each iteration
@@ -56,13 +55,13 @@ int calculateHistoricNumber(string line) {
 
 int main(void) {
     int total = 0;
-    std::ifstream file("aux.txt");
-    std::string line;
-    while (std::getline(file, line)) {
-        cout << line << endl;
-        total += calculateHistoricNumber(line);
-    }
-    file.close();
+    // std::ifstream file("aux.txt");
+    // std::string line;
+    // while (std::getline(file, line)) {
+    //     total += calculateHistoricNumber(line);
+    // }
+    // file.close();
+    total = calculateHistoricNumber("1 3 6 10 15 21");
     cout << "TOTAL:" << total << endl;
 
     return 0;
