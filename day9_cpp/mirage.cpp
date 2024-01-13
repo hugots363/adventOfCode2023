@@ -16,6 +16,18 @@ vector<int> createNextIteration(const vector<int> &prevIter) {
     return iter;
 }
 
+bool iterateAgain(const vector<int> &vec){
+    if(vec.size() == 1){
+        return true;
+    }
+    for(int i = 0; i < vec.size() - 1; ++i){
+        if((vec[i + 1] - vec[i]) != 0 ){
+            return true;
+        }
+    }
+    return false;
+}
+
 int calculateHistoricNumber(string line) {
     vector<int> lineOfNums;
     std::istringstream iss(line);
@@ -37,7 +49,7 @@ int calculateHistoricNumber(string line) {
 
     int iterations = 0;
     //Generation the pyramidal structure that stores each iteration
-    while ( (historics[iterations][0] != 0) || (historics[iterations][1] != 0)) {
+    while ( iterateAgain(historics[iterations]) ) {
         historics.push_back(createNextIteration(historics[iterations]));
         iterations++;
     }
