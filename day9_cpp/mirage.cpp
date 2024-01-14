@@ -5,6 +5,16 @@
 
 using namespace std;
 
+/*
+Theoretical approach
+Terms:
+m = number of lines in the file
+n = quantity of numbers in each line
+
+This problem has an algorithmic cost of O(mn^2). This is a problem since the running time of the code increases quadratically.
+
+*/
+
 vector<int> createNextIteration(const vector<int> &prevIter) {
     vector<int> iter;
     for (size_t i = 0; i < prevIter.size() - 1; ++i) {
