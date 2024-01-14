@@ -5,7 +5,22 @@ In this repository, I will upload all the problems I manage to solve in Advent o
 
 ## Usage
 
-TODO
+Each day indicates in the folder name the language used to solve the problem. For the python days, python3 have been used. To execute the python solutions:
+
+```python
+{
+    python3 <scriptName>.py
+}
+```
+
+For the C++ solutions, Clang 14 for C++20 have been used. First, you need to compile and the run the executable. 
+
+```C++
+{
+    clang++ -std=c++20 sourceCodeName.cpp -o executableName
+    ./executableName
+}
+```
 
 ## Overview
 
@@ -19,7 +34,7 @@ TODO
 | 06  | waitForIt      | ⭐⭐  |
 | 07  | cards          | ⭐⭐  |
 | 08  | hauntedWasteland| ⭐    |
-| 09  |                |       |
+| 09  |                |  ⭐⭐ |
 | 10  |  pipeMaze      | ⭐⭐  |
 | 11  |                |       |
 | 12  |                |       |
