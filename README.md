@@ -7,19 +7,15 @@ In this repository, I will upload all the problems I manage to solve in Advent o
 
 Each day indicates in the folder name the language used to solve the problem. For the python days, python3 have been used. To execute the python solutions:
 
-```python
-{
-    python3 <scriptName>.py
-}
+```console
+python3 <scriptName>.py
 ```
 
 For the C++ solutions, Clang 14 for C++20 have been used. First, you need to compile and the run the executable. 
 
-```C++
-{
-    clang++ -std=c++20 sourceCodeName.cpp -o executableName
-    ./executableName
-}
+```console
+clang++ -std=c++20 sourceCodeName.cpp -o executableName
+./executableName
 ```
 
 ## Overview
