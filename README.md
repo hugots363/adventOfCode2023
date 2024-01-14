@@ -14,7 +14,7 @@ python3 <scriptName>.py
 For the C++ solutions, Clang 14 for C++20 have been used. First, you need to compile and the run the executable. 
 
 ```console
-clang++ -std=c++20 sourceCodeName.cpp -o executableName
+clang++ -std=c++20 <sourceCodeName>.cpp -o <executableName>
 ./executableName
 ```
 
@@ -30,7 +30,7 @@ clang++ -std=c++20 sourceCodeName.cpp -o executableName
 | 06  | waitForIt      | ⭐⭐  |
 | 07  | cards          | ⭐⭐  |
 | 08  | hauntedWasteland| ⭐    |
-| 09  |                |  ⭐⭐ |
+| 09  | mirage         |  ⭐⭐ |
 | 10  |  pipeMaze      | ⭐⭐  |
 | 11  |                |       |
 | 12  |                |       |
