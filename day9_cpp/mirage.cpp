@@ -28,7 +28,7 @@ bool iterateAgain(const vector<int> &vec) {
     return false;
 }
 
-int calculateHistoricNumber(const string &line) {
+int calculateHistoricNumber(const string& line) {
     vector<int> lineOfNums;
     istringstream iss(line);
     int num;
@@ -52,9 +52,11 @@ int calculateHistoricNumber(const string &line) {
     }
 
     int lastValue = 0;
-    historics[iterations].push_back(0);
-    for (int i = iterations - 1; i > 0; i--) {
-        lastValue = historics[i].back() + historics[i - 1].back();
+    
+    for (int i = iterations; i > 0; i--) {
+        int a = historics[i].back();
+        int b = historics[i - 1].back();
+        lastValue = a + b;
         historics[i - 1].push_back(lastValue);
     }
 
