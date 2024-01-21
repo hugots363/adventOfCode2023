@@ -1,7 +1,16 @@
 '''
 Theoretical approach
 
-TODO
+Terms:
+m = number of lines in the file
+n = quantity of chars in each line
+
+calculateDistancesInAllPairs is the heavier function so we are taking that one as the O cost. That function uses 
+getDistance that has a cost of O(nlogm + mlogn). Therefore, the temporary cost would be O(mn(nlogm + mlogn)) since 
+in the worst case all chars are galaxies. Therefore, the cost is O(n^2mlogm+m^2nlogn). We could express it as O(n^3logn)
+assuming the matrix is a squared one, being n the length of line.
+
+This would be in the worst case scenario were all the chars are a galaxies
 '''
 
 import bisect 
@@ -52,7 +61,7 @@ def calculateDistancesInAllPairs(galaxies,exp_rows,exp_cols):
     nPos = 1
     for initialPos,galaxy in enumerate(galaxies):
         for i in range (nPos,nGalaxies):
-            distance += getDistance(galaxy,galaxies[i],1,exp_cols,exp_rows)
+            distance += getDistance(galaxy,galaxies[i],1000000,exp_cols,exp_rows)
         nPos+=1
     return distance
 
@@ -62,8 +71,6 @@ def binary_search(sorted_sequence, target):
 
 def getDistance(galA, galB,expanded_dist, expanded_rows, expanded_cols):
     distance = 0 
-    #print(galA)
-    #print(galB)
     if galA[0] != galB[0]:
         a, b = min(galA[0],galB[0]), max(galA[0],galB[0])
         for x in range(a+1,b+1):
@@ -72,28 +79,23 @@ def getDistance(galA, galB,expanded_dist, expanded_rows, expanded_cols):
                 distance+= expanded_dist
             else:
                 distance+= 1
-    #print("D: " +str(distance))
     if galA[1] != galB[1]:
         a, b = min(galA[1],galB[1]), max(galA[1],galB[1])
         for y in range(a+1,b+1):
-            #print(y)
             if binary_search(expanded_rows,y):
                 distance+= expanded_dist
             else:
                 distance+= 1  
-    #print("D: " +str(distance))
-    #print("-------------------")
     return distance        
 
 def main():
 
     universe = loadUniverse("input.txt")
     exp_rows = getExpandedRows(universe)
-    #print(exp_rows)
     exp_cols = getExpandedCols(universe)
-    #print(exp_cols)
     galaxies = getGalaxiesPos(universe)
     distance = calculateDistancesInAllPairs(galaxies,exp_rows,exp_cols)
+
     print("\nTotal galaxies shortest paths: "+str(distance))
 
 if __name__ == "__main__":

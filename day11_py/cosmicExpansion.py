@@ -1,7 +1,13 @@
 '''
 Theoretical approach
 
-TODO
+Terms:
+m = number of lines in the file
+n = quantity of chars in each line
+
+The total cost of the algorithm is O(m*n+m*n+m*n+(mn)^2) = O(mn+(mn)^2) = O((mn)^2)
+
+This would be in the worst case scenario were all the chars are galaxies
 '''
 def loadUniverse(file):
     universe = []

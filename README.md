@@ -32,7 +32,7 @@ clang++ -std=c++20 <sourceCodeName>.cpp -o <executableName>
 | 08  | hauntedWasteland| ⭐    |
 | 09  | mirage         |  ⭐⭐ |
 | 10  |  pipeMaze      | ⭐⭐  |
-| 11  | cosmicExpansion| ⭐  |
+| 11  | cosmicExpansion| ⭐ ⭐|
 | 12  |                |       |
 | 13  |                |       |
 | 14  | parabolic      | ⭐    |
