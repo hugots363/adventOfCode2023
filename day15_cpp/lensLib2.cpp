@@ -1,23 +1,22 @@
 #include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <algorithm>
+#include <sstream>
 #include <string>
 #include <fstream>
-#include <map>
-#include <vector>
-#include <algorithm> 
 
 /*
 Theoretical approach
 Terms:
-m = number of lines in the file
-n = quantity of chars in each line
+m = number of words (like for example gjtq=1) in the input file
 
-The algorithm would have a cost of O(mn+mn+mn^2+mn) = O(3mn+mn^2) = O(mn^2) in temporal terms.
-In spatial terms the cost is O(m*n). 
+The algorithm would have a cost of O(m^2);
 */
 
 using namespace std;
 
-int myHashing(string word){
+int hashing(string word){
     int total = 0;
     for(const auto character : word){
         total= ((total+int(character))*17)%256;
@@ -25,86 +24,64 @@ int myHashing(string word){
     return total;
 }
 
- int getTotalHashes(const string& filePath) {
+vector<string> split(const string &s, char delimiter) {
+    vector<string> tokens;
+    string token;
+    istringstream tokenStream(s);
+    while (getline(tokenStream, token, delimiter)) {
+        tokens.push_back(token);
+    }
+    return tokens;
+}
+
+int main(){
+    vector<vector<string>> boxes(256);
+    unordered_map<string, int> focal_lengths;
+
+    string filePath = "input.txt";
     ifstream inputFile(filePath);
     int total = 0;
 
     if (!inputFile.is_open()) {
         std::cerr << "Unable to open the file: " << filePath << std::endl;
-        exit(1);
-    }
-
-    map<int, vector<tuple<string, int>>> boxes;
-    for (int i = 0; i < 255; ++i) {
-        boxes[i] = {};
+        exit(0);
     }
 
     string line;
-    string hash;
-    int storedBox;
-    int lensPos;
-    bool addingLens;
-    std::getline(inputFile, line);
-    cout << line << endl;
+    getline(inputFile, line);
+    vector<string> inputs = split(line, ',');
 
-    for(const auto character : line){
-        if(character == ','){
-            if(addingLens){
-                auto it = find_if(boxes[storedBox].begin(), boxes[storedBox].end(),
-                       [hash](const auto& tuple) {
-                           return get<0>(tuple) == hash;
-                       });
-                if (it != boxes[storedBox].end()){
-                    cout << "found-------------------------"<<endl;
-                    get<1>(*it) = lensPos;
-                }
-                else{
-                    boxes[storedBox].emplace_back(make_tuple(hash,lensPos));
-                }
-                 
+    for (const auto& step : inputs) {
+        if (step.find('=') != string::npos) {
+            string label = step.substr(0, step.find('='));
+            int focal_length = stoi(step.substr(step.find('=') + 1));
+            int box = hashing(label);
+            focal_lengths[label] = focal_length;
+
+            auto it = find(boxes[box].begin(), boxes[box].end(), label);
+            if (it != boxes[box].end()) {
+                *it = label;
+            } else {
+                boxes[box].push_back(label);
             }
-            else{
-                if (boxes.find(storedBox) != boxes.end() && !boxes[storedBox].empty()) {
-                    boxes[storedBox].erase(boxes[storedBox].begin());
-                }
-            }
-            hash = "";
         }
-        else{
-            if(character == '='|| character == '-'){
-                if(character == '='){addingLens = true;}
-                else{addingLens = false;}
-                storedBox = myHashing(hash);
-            }
-            else{
-                if(!isdigit(character)){
-                    hash += character;
-                }
-                else{
-                    lensPos =   character -'0';
-                }
-            }
-        }        
-    }
-    boxes[storedBox].emplace_back(make_tuple(hash, addingLens ? lensPos : 0)); 
 
-    for (const auto& outerEntry : boxes) {
-        std::cout << "Outer Key: " << outerEntry.first << std::endl;
-        for (const auto& innerEntry : outerEntry.second) {
-            std::cout << "  Inner Key: " << get<0>(innerEntry)
-                      << ", Value: " << get<1>(innerEntry) << std::endl; 
+        if (step.find('-') != string::npos) {
+            string label = step.substr(0, step.size() - 1);
+            int box = hashing(label);
+            boxes[box].erase(remove(boxes[box].begin(), boxes[box].end(), label), boxes[box].end());
         }
     }
 
-    inputFile.close();
+    int solution2 = 0;
+    for (int box_index = 0; box_index < boxes.size(); ++box_index) {
+        for (int slot_index = 0; slot_index < boxes[box_index].size(); ++slot_index) {
+            string label = boxes[box_index][slot_index];
+            solution2 += (box_index + 1) * (slot_index + 1) * focal_lengths[label];
+        }
+    }
 
-    return total;
-}
+    cout << "Solution 2: " << solution2 << endl;
 
-int main(){
-    std::string inputFile = "aux.txt";
-    int total = getTotalHashes(inputFile);
-    cout << "Total: " << total << endl; 
-    cout << "hashing: " << myHashing("rn=1") << endl; 
     return 0;
 }
