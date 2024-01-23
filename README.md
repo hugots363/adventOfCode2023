@@ -37,7 +37,7 @@ clang++ -std=c++20 <sourceCodeName>.cpp -o <executableName>
 | 13  |                |       |
 | 14  | parabolic      | ⭐    |
 | 15  | lensLib        |⭐ ⭐ |
-| 16  |                |       |
+| 16  | lava           | ⭐ ⭐ |
 | 17  |                |       |
 | 18  |                |       |
 | 19  |                |       |
