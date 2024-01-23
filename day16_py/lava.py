@@ -2,12 +2,8 @@
 Theoretical approach
 
 Terms:
-m = number of lines in the file
-n = quantity of chars in each line
-
-The total cost of the algorithm is O(m*n+m*n+m*n+(mn)^2) = O(mn+(mn)^2) = O((mn)^2)
-
-This would be in the worst case scenario were all the chars are galaxies
+m = 
+n = 
 '''
 
 def loadMatrix(file):
@@ -21,7 +17,7 @@ def loadMatrix(file):
         print(f"The file '{file}' was not found.")
     return matrix
 
-def shotBeam(initPos, matrix,energyzedBeams):
+def shotBeam(initPos, matrix,energyzedBeams,visited):
     new_beams = []
     not_reached_border = True
     x = initPos[0]
@@ -31,6 +27,7 @@ def shotBeam(initPos, matrix,energyzedBeams):
 
     while(not_reached_border):
         energyzedBeams[x][y] = 1
+        visited.add((x, y,new_x,new_y))
         x = x+new_x
         y = y+new_y
         #Checking if border reached
@@ -39,11 +36,13 @@ def shotBeam(initPos, matrix,energyzedBeams):
             break
         symbol = matrix[x][y]
         #Movement
-        #UP and DOWN
-        if(new_x == -1 or new_x == 1):
+        #UP
+        if(new_x == -1 ):
             if symbol == '-':
-                new_beams.append((x,y,0,-1))
-                new_beams.append((x,y,0,1))
+                if (x,y,0,-1) not in visited:
+                    new_beams.append((x,y,0,-1))
+                if (x,y,0,1) not in visited:
+                    new_beams.append((x,y,0,1))
                 break
             elif symbol == '\\':
                 new_x = 0
@@ -51,11 +50,27 @@ def shotBeam(initPos, matrix,energyzedBeams):
             elif symbol == '/':
                 new_x = 0
                 new_y = 1
+        #DOWN
+        elif(new_x == 1):
+            if symbol == '-':
+                if (x,y,0,-1) not in visited:
+                    new_beams.append((x,y,0,-1))
+                if (x,y,0,1) not in visited:
+                    new_beams.append((x,y,0,1))
+                break
+            elif symbol == '\\':
+                new_x = 0
+                new_y = 1
+            elif symbol == '/':
+                new_x = 0
+                new_y = -1       
         #LEFT 
         elif(new_y == -1):
             if symbol == '|':
-                new_beams.append((x,y,-1,0))
-                new_beams.append((x,y,1,0))
+                if (x,y,-1,0) not in visited:
+                    new_beams.append((x,y,-1,0))
+                if (x,y,1,0) not in visited:
+                    new_beams.append((x,y,1,0))
                 break
             elif symbol == '\\':
                 new_x = -1 
@@ -64,10 +79,12 @@ def shotBeam(initPos, matrix,energyzedBeams):
                 new_x = 1 
                 new_y = 0
         #RIGHT
-        else:
+        elif(new_y == 1):
             if symbol == '|':
-                new_beams.append((x,y,-1,0))
-                new_beams.append((x,y,1,0))
+                if (x,y,-1,0) not in visited:
+                    new_beams.append((x,y,-1,0))
+                if (x,y,1,0) not in visited:
+                    new_beams.append((x,y,1,0))
                 break
             elif symbol == '\\':
                 new_x = 1 
@@ -80,12 +97,13 @@ def shotBeam(initPos, matrix,energyzedBeams):
 
 def main():
 
-    matrix = loadMatrix("aux.txt")
+    matrix = loadMatrix("input.txt")
+    #matrix = loadMatrix("aux.txt")
     energyzedBeams = [[0 for j in range(len(matrix[0]))] for i in range(len(matrix))]
-    new_beams = [(0,0,0,1)]
+    visited = set()
+    new_beams = [(0,0,1,0)]
     while new_beams:
-        new_beams += shotBeam(new_beams.pop(0),matrix,energyzedBeams)
-        print("beams:" + str(new_beams))
+        new_beams += shotBeam(new_beams.pop(0),matrix,energyzedBeams,visited)
     
     total = sum(sum(energyzedBeams,[]))
     print("Energyzed beams: "+str(total))
