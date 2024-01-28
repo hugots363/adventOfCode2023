@@ -10,13 +10,12 @@ Pick's theorem
 Area = points_inside + points_in_the_boundary/2 +1  ->
 points_inside = Area -points_in_the_boundary/2 -1
 
-The result for the problem is the sum of inside and boundary ponts.
+The result for the problem is the sum of inside and boundary points.
 
-So, we need the Area, that we are going to calculate using the Shoelace formula
-to calculate the area of the polygon . 
+So, we need the Area, that we are going to calculate using the Shoelace formula.
+After that, we will just use the boundary numer of points that is given in the input
+to calculate the number of points inside. Then, we will just sum inside and boundary points.
 '''
-
-
 
 def get_init(file_path):
     try:
@@ -28,10 +27,17 @@ def get_init(file_path):
         return None  
 
 def extractDataFromLine(line):
-    dir = line[0]
-    quant = int(line[2])
-    rgb = line[6:11]
-    return (dir,quant,rgb)
+    parts = line.split() 
+    if len(parts) >= 3:
+        direction = parts[0]
+        if len(parts[1]) > 0 and parts[1].isdigit():
+            quantity = int(parts[1])
+            if len(parts) >= 4 and len(parts[2]) >= 7 and parts[2][0] == '(' and parts[2][-1] == ')':
+                rgb = parts[2][1:]
+            else:
+                rgb = ''
+            return (direction, quantity, rgb)
+    return None 
 
 def calc_next_vertex(origin,data):
     dir = data[0]
@@ -70,22 +76,18 @@ def shoelace(points):
         j = (i + 1) % len(points)
         left_sum += points[i][0] * points[j][1]
         right_sum += points[j][0] * points[i][1]
-
     return 0.5 * abs(left_sum - right_sum)
 
-def calculate_total_points(area,boundary_points,):
-    interior_points = area - boundary_points/2.0 +1
+def calculate_total_points(area,boundary_points):
+    interior_points = area + 1.0 - (boundary_points/2.0) 
     return interior_points + boundary_points
 
 
 def main():
-    #vertex,boundary_points = getPolygonPoints("aux.txt")
     vertex,boundary_points = getPolygonPoints("input.txt")
-    print(vertex)
     area = shoelace(vertex)
-    print(area)
     cubic_meters = calculate_total_points(area,boundary_points)
-    print("Total digged cubic meters:" + str(cubic_meters))
+    print("Total digged cubic meters: " + str(cubic_meters))
  
 if __name__ == "__main__":
     main()
