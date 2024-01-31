@@ -39,7 +39,7 @@ clang++ -std=c++20 <sourceCodeName>.cpp -o <executableName>
 | 15  | lensLib        |⭐ ⭐ |
 | 16  | lava           | ⭐ ⭐ |
 | 17  |                |       |
-| 18  |                |       |
+| 18  |  lavaduct      |⭐ ⭐ |
 | 19  |                |       |
 | 20  |                |       |
 | 21  |                |       |
