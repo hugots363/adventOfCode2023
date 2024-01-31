@@ -69,14 +69,13 @@ def getPolygonPoints(file):
     return points,boundary_points
 
 def shoelace(points):
-    left_sum = 0.0
-    right_sum = 0.0
-
-    for i in range(len(points)):
-        j = (i + 1) % len(points)
-        left_sum += points[i][0] * points[j][1]
-        right_sum += points[j][0] * points[i][1]
-    return 0.5 * abs(left_sum - right_sum)
+    n = len(points)
+    area = 0
+    for i in range(n):
+        j = (i + 1) % n
+        area += points[i][0] * points[j][1]
+        area -= points[j][0] * points[i][1]
+    return abs(area) / 2
 
 def calculate_total_points(area,boundary_points):
     interior_points = area + 1.0 - (boundary_points/2.0) 
