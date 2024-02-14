@@ -40,7 +40,7 @@ clang++ -std=c++20 <sourceCodeName>.cpp -o <executableName>
 | 16  | lava           | ⭐ ⭐ |
 | 17  |                |       |
 | 18  |  lavaduct      |⭐ ⭐ |
-| 19  |                |       |
+| 19  |  aplenty       |⭐     |
 | 20  |                |       |
 | 21  |                |       |
 | 22  |                |       |
