@@ -41,7 +41,7 @@ clang++ -std=c++20 <sourceCodeName>.cpp -o <executableName>
 | 17  |                |       |
 | 18  |  lavaduct      |⭐ ⭐ |
 | 19  |  aplenty       |⭐     |
-| 20  |                |       |
+| 20  | pulseProp      |⭐     |
 | 21  |                |       |
 | 22  |                |       |
 | 23  |                |       |
