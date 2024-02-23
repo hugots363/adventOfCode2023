@@ -1,9 +1,11 @@
 '''
 Theoretical approach
 Terms:
-m = 
-n = 
-The total cost of the algorithm is O(?)
+m = number of lines in the input (commands)
+n = each instruction a command generates 
+
+The total cost of the algorithm is O(mn*1000), since this loop is done that number of times.
+ Therefore, the cost is O(mn)
 
 '''
 class Module:
