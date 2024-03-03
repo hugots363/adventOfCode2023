@@ -38,7 +38,7 @@ clang++ -std=c++20 <sourceCodeName>.cpp -o <executableName>
 | 14  | parabolic      | ⭐    |
 | 15  | lensLib        |⭐ ⭐ |
 | 16  | lava           | ⭐ ⭐ |
-| 17  |                |       |
+| 17  |  crucibles     |⭐ ⭐ |
 | 18  |  lavaduct      |⭐ ⭐ |
 | 19  |  aplenty       |⭐     |
 | 20  | pulseProp      |⭐     |
