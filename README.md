@@ -44,11 +44,12 @@ clang++ -std=c++20 <sourceCodeName>.cpp -o <executableName>
 | 20  | pulseProp      |⭐     |
 
 
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
-
 ## Goals for the next year
 
 - To solve all the problems
 - Keep the pace of a problem per day 
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
