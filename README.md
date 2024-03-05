@@ -42,13 +42,13 @@ clang++ -std=c++20 <sourceCodeName>.cpp -o <executableName>
 | 18  |  lavaduct      |⭐ ⭐ |
 | 19  |  aplenty       |⭐     |
 | 20  | pulseProp      |⭐     |
-| 21  |                |       |
-| 22  |                |       |
-| 23  |                |       |
-| 24  |                |       |
-| 25  |                |       |
 
 
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
+## Goals for the next year
+
+- To solve all the problems
+- Keep the pace of a problem per day 
